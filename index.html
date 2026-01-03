@@ -31,43 +31,46 @@
                     }
                 }
             }
-        }  function startSearch() {
-    let word = document.getElementById('searchInput').value.toLowerCase();
-    let resultsBox = document.getElementById('resultsBox');
+        } 
+    </script>
+        <script>
+        function startSearch() {
+            const word = document.getElementById('searchInput').value.toLowerCase();
+            const resultsBox = document.getElementById('resultsBox');
 
-    if (word.length < 2) {
-        resultsBox.style.display = 'none';
-        resultsBox.innerHTML = '';
-        return;
-    }
+            if (word.length < 2) {
+                resultsBox.style.display = 'none';
+                resultsBox.innerHTML = '';
+                return;
+            }
 
-    fetch('medicines.json')
-    .then(res => {
-        if (!res.ok) throw new Error("ملف البيانات غير موجود");
-        return res.json();
-    })
-    .then(data => {
-        let filtered = data.filter(drug => drug.name.toLowerCase().includes(word));
-        
-        if (filtered.length > 0) {
-            resultsBox.style.display = 'block';
-            resultsBox.innerHTML = filtered.map(drug => `
-                <div class="drug-card" style="display:flex; align-items:center; border-bottom:1px solid #eee; padding:10px; cursor:pointer;">
-                    <img src="${drug.image}" style="width:40px; height:40px; object-fit:contain; margin-left:10px;">
-                    <div style="flex-grow:1; text-align:right;">
-                        <b style="color:#0d7377; display:block;">${drug.name}</b>
-                        <small style="color:#666;">${drug.category}</small>
-                    </div>
-                    <div style="font-weight:bold; color:#14a085;">${drug.price} ج.م</div>
-                </div>
-            `).join('');
-        } else {
-            resultsBox.style.display = 'block';
-            resultsBox.innerHTML = '<div style="padding:15px; text-align:center;">عذراً، الدواء غير موجود</div>';
+            fetch('medicines.json')
+                .then(res => {
+                    if (!res.ok) throw new Error("ملف البيانات غير موجود");
+                    return res.json();
+                })
+                .then(data => {
+                    const filtered = data.filter(drug => drug.name.toLowerCase().includes(word));
+                    
+                    if (filtered.length > 0) {
+                        resultsBox.style.display = 'block';
+                        resultsBox.innerHTML = filtered.map(drug => `
+                            <div class="flex items-center p-3 border-b hover:bg-gray-50 cursor-pointer text-right" dir="rtl">
+                                <img src="${drug.image}" class="w-10 h-10 object-contain ml-3" onerror="this.src='https://via.placeholder.com/40?text=Drug'">
+                                <div class="flex-grow">
+                                    <b class="text-primary block text-sm">${drug.name}</b>
+                                    <small class="text-gray-500 text-xs">${drug.category}</small>
+                                </div>
+                                <div class="font-bold text-secondary text-sm">${drug.price} ج.م</div>
+                            </div>
+                        `).join('');
+                    } else {
+                        resultsBox.style.display = 'block';
+                        resultsBox.innerHTML = '<div class="p-4 text-center text-gray-500 text-sm">عذراً، هذا الدواء غير متوفر حالياً</div>';
+                    }
+                })
+                .catch(err => console.error("Error:", err));
         }
-    })
-    .catch(err => console.error("Error fetching JSON:", err));
-}
     </script>
     <style>
         :where([class^="ri-"])::before {
