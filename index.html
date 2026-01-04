@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>صيدلية دكتور محمد عصمت</title>
     <script src="https://cdn.tailwindcss.com/3.4.16"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css" rel="stylesheet">
     
@@ -14,9 +16,9 @@
                 extend: {
                     colors: {
                         primary: '#0d7377',
-                        accent: '#facc15'
+                        secondary: '#14a085'
                     },
-                    fontFamily: { cairo: ['Cairo', 'sans-serif'] }
+                    borderRadius: { 'button': '8px' }
                 }
             }
         }
@@ -24,163 +26,201 @@
 
     <style>
         body { font-family: 'Cairo', sans-serif; }
-        .hero-section {
-            background: linear-gradient(rgba(13, 115, 119, 0.8), rgba(13, 115, 119, 0.8)), 
-                        url('https://images.unsplash.com/photo-1586015555751-63bb77f4322a?q=80&w=1920');
-            background-size: cover;
-            background-position: center;
-        }
-        /* نتائج البحث لتناسب تصميمك */
+        
+        /* تنسيق صندوق نتائج البحث ليتناسب مع ألوانك البترولية */
         .search-results-box {
             position: absolute;
             top: 100%;
             left: 0;
             right: 0;
-            z-index: 50;
+            z-index: 100;
             background: white;
             border-radius: 12px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-            max-height: 300px;
+            box-shadow: 0 10px 25px rgba(13, 115, 119, 0.2);
+            max-height: 350px;
             overflow-y: auto;
-            margin-top: 8px;
+            border: 1px solid rgba(13, 115, 119, 0.1);
+            margin-top: 5px;
             display: none;
         }
+
         .search-item {
             display: flex;
             align-items: center;
-            padding: 10px 15px;
-            border-bottom: 1px solid #eee;
-            cursor: pointer;
+            padding: 12px;
+            border-bottom: 1px solid #f0f0f0;
             transition: 0.2s;
+            cursor: pointer;
+            color: #333;
         }
+
         .search-item:hover { background: #f0f9f9; }
+        .search-item img { width: 40px; height: 40px; object-fit: contain; margin-left: 12px; }
     </style>
 </head>
-<body class="bg-white text-gray-800">
+<body class="bg-gray-50">
 
-    <header class="bg-primary text-white py-2 px-4 md:px-12 flex justify-between items-center text-sm border-b border-white/10">
-        <div class="flex gap-4">
-            <span>ساعات العمل: 24/7</span>
-            <a href="tel:01069446443"><i class="ri-phone-fill"></i> 69446443 10 0</a>
+    <header class="bg-primary text-white shadow-lg">
+        <div class="bg-primary/90 py-2">
+            <div class="max-w-7xl mx-auto px-4 flex justify-between items-center text-sm">
+                <div class="flex items-center gap-4">
+                    <a href="tel:+201069446443" class="flex items-center gap-2 text-white/80 hover:underline">
+                        <i class="ri-phone-line"></i> 01069446443
+                    </a>
+                    <span class="flex items-center gap-2"><i class="ri-mail-line"></i> info@drmohamedesmat.com</span>
+                </div>
+                <div class="flex items-center gap-4">
+                    <span>ساعات العمل: 24/7</span>
+                    <div class="flex gap-2">
+                        <i class="ri-facebook-fill text-blue-400"></i>
+                        <i class="ri-twitter-fill text-blue-300"></i>
+                        <i class="ri-instagram-fill text-pink-400"></i>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="flex gap-3">
-            <i class="ri-facebook-fill"></i>
-            <i class="ri-twitter-fill"></i>
-            <i class="ri-instagram-fill"></i>
+        
+        <div class="max-w-7xl mx-auto px-4 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                    <div class="w-12 h-12 flex items-center justify-center bg-yellow-400 rounded-full">
+                        <img src="logo.png" alt="لوجو" class="w-full h-full object-cover" onerror="this.src='https://cdn-icons-png.flaticon.com/512/822/822143.png'">
+                    </div>
+                    <div>
+                        <h1 class="text-2xl font-bold">دكتور محمد عصمت</h1>
+                        <p class="text-sm text-white/80">صيدلية موثوقة</p>
+                    </div>
+                </div>
+                
+                <nav class="hidden md:flex items-center gap-8">
+                    <a href="#" class="hover:text-yellow-400 transition-colors font-bold">الرئيسية</a>
+                    <a href="#" class="hover:text-yellow-400 transition-colors font-bold">الأدوية</a>
+                    <a href="#" class="hover:text-yellow-400 transition-colors font-bold">العروض</a>
+                    <a href="#" class="hover:text-yellow-400 transition-colors font-bold">اتصل بنا</a>
+                </nav>
+
+                <div class="flex items-center gap-4">
+                    <div class="relative">
+                        <input type="text" id="navSearch" onkeyup="handleSearch('navSearch', 'navResults')" placeholder="ابحث هنا..." class="bg-white/20 border border-white/30 rounded-full px-4 py-2 pr-10 text-white placeholder-white/70 focus:outline-none focus:bg-white/30 w-48 md:w-64">
+                        <i class="ri-search-line absolute right-3 top-1/2 -translate-y-1/2 text-white/70"></i>
+                        <div id="navResults" class="search-results-box"></div>
+                    </div>
+                </div>
+            </div>
         </div>
     </header>
 
-    <nav class="bg-primary text-white py-4 px-4 md:px-12 flex justify-between items-center sticky top-0 z-40">
-        <div class="flex items-center gap-8">
-            <div class="flex items-center gap-2">
-                <img src="logo.png" class="w-10 h-10 rounded-full bg-white" onerror="this.src='https://cdn-icons-png.flaticon.com/512/822/822143.png'">
-                <div class="font-bold text-lg">دكتور محمد عصمت <br><span class="text-[10px] text-accent">صيدلية موثوقة</span></div>
+    <section class="relative overflow-hidden py-24" style="background: linear-gradient(rgba(13, 115, 119, 0.7), rgba(13, 115, 119, 0.7)), url('https://images.unsplash.com/photo-1586015555751-63bb77f4322a?q=80&w=1920'); background-size: cover; background-position: center;">
+        <div class="relative max-w-7xl mx-auto px-4 text-center text-white">
+            <h1 class="text-5xl md:text-6xl font-bold mb-6">مرحباً بكم في صيدلية دكتور محمد عصمت</h1>
+            <p class="text-xl md:text-2xl mb-8 text-white/90">خدمات صيدلانية موثوقة لصحتكم وعائلتكم</p>
+            
+            <div class="flex flex-col md:flex-row items-center justify-center gap-6 mb-12">
+                <button class="bg-yellow-400 text-primary px-8 py-4 rounded-button text-lg font-bold hover:bg-yellow-300 transition-colors shadow-lg">
+                    تسوق الآن
+                </button>
+                <div class="relative">
+                    <input type="text" id="heroSearch" onkeyup="handleSearch('heroSearch', 'heroResults')" placeholder="اكتب اسم الدواء (مثل: Panadol)" class="bg-white border-2 border-secondary rounded-full px-6 py-4 pr-12 text-gray-800 placeholder-gray-500 focus:outline-none focus:border-yellow-400 w-80 shadow-2xl">
+                    <i class="ri-search-line absolute right-4 top-1/2 -translate-y-1/2 text-secondary text-xl"></i>
+                    <div id="heroResults" class="search-results-box text-right"></div>
+                </div>
             </div>
-            <ul class="hidden md:flex gap-6 font-medium">
-                <li>الرئيسية</li>
-                <li>الأدوية</li>
-                <li>العروض</li>
-                <li>عنا</li>
-                <li>اتصل بنا</li>
-            </ul>
-        </div>
-        <div class="flex items-center gap-4">
-            <div class="relative hidden md:block">
-                <input type="text" id="navSearch" onkeyup="handleSearch('navSearch', 'navResults')" placeholder="ابحث عن دواء..." class="bg-white/10 border border-white/20 rounded-full py-1 px-8 focus:outline-none focus:bg-white focus:text-primary transition-all">
-                <i class="ri-search-line absolute left-3 top-1.5 opacity-50"></i>
-                <div id="navResults" class="search-results-box text-gray-800"></div>
-            </div>
-            <i class="ri-shopping-cart-line text-xl"></i>
-            <i class="ri-user-line text-xl"></i>
-        </div>
-    </nav>
 
-    <section class="hero-section h-[500px] flex flex-col items-center justify-center text-center text-white px-4">
-        <h2 class="text-4xl md:text-6xl font-bold mb-4">مرحباً بكم في صيدلية دكتور <br>محمد عصمت</h2>
-        <p class="mb-8 opacity-90">خدمات صيدلانية موثوقة لصحتكم وعائلتكم</p>
-        
-        <div class="flex w-full max-w-xl relative">
-            <input type="text" id="mainSearch" onkeyup="handleSearch('mainSearch', 'mainResults')" placeholder="panadol" class="w-full py-4 px-6 rounded-r-full text-gray-800 focus:outline-none">
-            <button class="bg-accent text-primary px-8 py-4 rounded-l-full font-bold">تسوق الآن</button>
-            <div id="mainResults" class="search-results-box text-right text-gray-800"></div>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+                <div class="bg-white/20 backdrop-blur-sm rounded-lg p-6">
+                    <div class="text-3xl font-bold text-yellow-400">15+</div>
+                    <div class="text-white/90 font-bold">سنة خبرة</div>
+                </div>
+                <div class="bg-white/20 backdrop-blur-sm rounded-lg p-6 border-b-4 border-yellow-400">
+                    <div class="text-3xl font-bold text-yellow-400">5000+</div>
+                    <div class="text-white/90 font-bold">عميل راضي</div>
+                </div>
+                <div class="bg-white/20 backdrop-blur-sm rounded-lg p-6">
+                    <div class="text-3xl font-bold text-yellow-400">24/7</div>
+                    <div class="text-white/90 font-bold">خدمة مستمرة</div>
+                </div>
+                <div class="bg-white/20 backdrop-blur-sm rounded-lg p-6">
+                    <div class="text-3xl font-bold text-yellow-400">30 دقيقة</div>
+                    <div class="text-white/90 font-bold">توصيل سريع</div>
+                </div>
+            </div>
         </div>
     </section>
 
-    <div class="max-w-6xl mx-auto -mt-16 grid grid-cols-2 md:grid-cols-4 gap-4 px-4 relative z-10">
-        <div class="bg-white/80 backdrop-blur p-6 rounded-2xl shadow-lg text-center">
-            <div class="text-accent text-3xl font-bold">+15</div>
-            <div class="text-xs text-gray-500">سنة خبرة</div>
+    <section class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4">
+            <h2 class="text-3xl font-bold text-primary mb-12 border-r-4 border-yellow-400 pr-4">منتجاتنا المميزة</h2>
+            <div id="featuredProducts" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                </div>
         </div>
-        <div class="bg-white/80 backdrop-blur p-6 rounded-2xl shadow-lg text-center border-b-4 border-accent">
-            <div class="text-accent text-3xl font-bold">+5000</div>
-            <div class="text-xs text-gray-500">عميل راضي</div>
-        </div>
-        <div class="bg-white/80 backdrop-blur p-6 rounded-2xl shadow-lg text-center">
-            <div class="text-accent text-3xl font-bold">24/7</div>
-            <div class="text-xs text-gray-500">خدمة مستمرة</div>
-        </div>
-        <div class="bg-white/80 backdrop-blur p-6 rounded-2xl shadow-lg text-center">
-            <div class="text-accent text-3xl font-bold">30 دقيقة</div>
-            <div class="text-xs text-gray-500">توصيل سريع</div>
-        </div>
-    </div>
-
-    <section class="py-20 px-4 max-w-7xl mx-auto">
-        <div class="flex justify-between items-end mb-10">
-            <h3 class="text-2xl font-bold text-primary border-b-4 border-accent pb-2">أبرز المنتجات لدينا</h3>
-            <span class="text-gray-400 text-sm">يتم التحديث دورياً</span>
-        </div>
-        <div id="featuredArea" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 text-center">
-            </div>
     </section>
 
     <script>
-        // دالة البحث
-        async function handleSearch(inputId, resId) {
+        // دالة البحث المدمجة في تصميمك
+        async function handleSearch(inputId, resultsId) {
             const query = document.getElementById(inputId).value.toLowerCase().trim();
-            const resBox = document.getElementById(resId);
-            if(query.length < 2) { resBox.style.display = 'none'; return; }
+            const resultsBox = document.getElementById(resultsId);
+
+            if (query.length < 2) {
+                resultsBox.style.display = 'none';
+                return;
+            }
 
             try {
                 const response = await fetch('medicines.json');
                 const data = await response.json();
-                const filtered = data.filter(i => i.name.toLowerCase().includes(query));
+                const filtered = data.filter(item => item.name.toLowerCase().includes(query));
 
-                resBox.innerHTML = filtered.map(i => `
-                    <div class="search-item" onclick="order('${i.name}')">
-                        <img src="${i.image}" class="w-8 h-8 ml-3" onerror="this.src='https://cdn-icons-png.flaticon.com/512/822/822143.png'">
-                        <div class="flex-grow font-bold text-sm">${i.name}</div>
-                        <div class="text-secondary font-bold text-xs">${i.price} ج.م</div>
-                    </div>
-                `).join('');
-                resBox.style.display = 'block';
-            } catch(e) { console.error(e); }
+                if (filtered.length > 0) {
+                    resultsBox.innerHTML = filtered.map(item => `
+                        <div class="search-item" onclick="order('${item.name}')">
+                            <img src="${item.image}" onerror="this.src='https://cdn-icons-png.flaticon.com/512/822/822143.png'">
+                            <div class="flex-grow">
+                                <div class="font-bold text-primary">${item.name}</div>
+                                <div class="text-xs text-gray-500">${item.price} ج.م</div>
+                            </div>
+                            <i class="ri-whatsapp-line text-green-500 text-xl"></i>
+                        </div>
+                    `).join('');
+                    resultsBox.style.display = 'block';
+                } else {
+                    resultsBox.innerHTML = '<div class="p-4 text-center text-gray-400">لا توجد نتائج</div>';
+                    resultsBox.style.display = 'block';
+                }
+            } catch (err) { console.error(err); }
         }
 
-        // دالة تحميل المنتجات المميزة في الصفحة
+        // دالة عرض المنتجات في القسم المخصص لها
         async function loadFeatured() {
-            const area = document.getElementById('featuredArea');
+            const container = document.getElementById('featuredProducts');
             try {
                 const response = await fetch('medicines.json');
                 const data = await response.json();
-                area.innerHTML = data.slice(0, 4).map(i => `
-                    <div class="bg-white p-6 rounded-3xl shadow-sm border border-gray-100 hover:shadow-xl transition-all">
-                        <img src="${i.image}" class="h-32 mx-auto mb-4" onerror="this.src='https://cdn-icons-png.flaticon.com/512/822/822143.png'">
-                        <h4 class="font-bold text-primary mb-2">${i.name}</h4>
-                        <div class="text-secondary font-bold mb-4">${i.price} ج.م</div>
-                        <button onclick="order('${i.name}')" class="bg-primary text-white w-full py-2 rounded-xl text-sm">اطلب عبر واتساب</button>
+                container.innerHTML = data.slice(0, 8).map(item => `
+                    <div class="bg-white rounded-xl shadow-lg border border-gray-100 p-4 hover:shadow-2xl transition-all">
+                        <img src="${item.image}" class="w-full h-40 object-contain mb-4" onerror="this.src='https://cdn-icons-png.flaticon.com/512/822/822143.png'">
+                        <h3 class="font-bold text-primary text-lg mb-2">${item.name}</h3>
+                        <div class="flex justify-between items-center mt-4">
+                            <span class="text-xl font-bold text-gray-800">${item.price} ج.م</span>
+                            <button onclick="order('${item.name}')" class="bg-primary text-white p-2 rounded-lg hover:bg-secondary">
+                                <i class="ri-shopping-cart-2-line"></i>
+                            </button>
+                        </div>
                     </div>
                 `).join('');
-            } catch(e) { area.innerHTML = "تأكد من وجود ملف medicines.json"; }
+            } catch (e) { container.innerHTML = "يرجى رفع ملف medicines.json"; }
         }
 
         function order(name) {
-            window.open(`https://wa.me/201069446443?text=أريد طلب ${name}`, '_blank');
+            window.open(`https://wa.me/201069446443?text=أود طلب دواء: ${name}`, '_blank');
         }
 
+        // تشغيل التحميل وإغلاق البحث
         window.onload = loadFeatured;
         document.addEventListener('click', (e) => {
-            if(!e.target.closest('.relative')) document.querySelectorAll('.search-results-box').forEach(b => b.style.display = 'none');
+            if (!e.target.closest('.relative')) {
+                document.querySelectorAll('.search-results-box').forEach(b => b.style.display = 'none');
+            }
         });
     </script>
 </body>
