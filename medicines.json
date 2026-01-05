@@ -2,16 +2,16 @@
     {
         "name": "باراسيتامول",
         "price": "10",
-        "image": "https://cdn-icons-png.flaticon.com/512/822/822143.png"
+      
     },
     {
         "name": "أسبيرين",
         "price": "15",
-        "image": "https://cdn-icons-png.flaticon.com/512/822/822143.png"
+        
     },
     {
         "name": "إيبوبروفين",
         "price": "20",
-        "image": "https://cdn-icons-png.flaticon.com/512/822/822143.png"
+       
     }
 ]
