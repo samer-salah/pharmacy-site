@@ -42,162 +42,192 @@
     <body class="bg-gray-50">
     <!-- Header -->
     <header class="bg-primary text-white shadow-lg">
-        <!-- Top Bar -->
-        <div class="bg-primary/90 py-2">
-            <div class="max-w-7xl mx-auto px-4 flex justify-between items-center text-sm">
-                <div class="flex items-center gap-4">
-                   <a href="tel:+20106944643" class="flex items-center gap-2 text-white/80 hover:underline">
-    <i class="ri-phone-line"></i>
-    0 10 69446443
-</a>
+    <!-- Top Bar -->
+    <div class="bg-primary/90 py-2">
+        <div class="max-w-7xl mx-auto px-4 flex justify-between items-center text-sm">
+            <div class="flex items-center gap-4">
+                <a href="tel:+20106944643" class="flex items-center gap-2 text-white/80 hover:underline">
+                    <i class="ri-phone-line"></i>
+                    0 10 69446443
+                </a>
 
-                    <span class="flex items-center gap-2">
-                        <i class="ri-mail-line"></i>
-                        info@drmohamedesmat.com
+                <span class="flex items-center gap-2">
+                    <i class="ri-mail-line"></i>
+                    info@drmohamedesmat.com
+                </span>
+
+                <!-- زر القائمة للأجهزة الصغيرة (تم حذف التكرار) -->
+                <button class="md:hidden p-2 hover:bg-white/20 rounded-full transition-colors">
+                    <i class="ri-menu-line text-2xl"></i>
+                </button>
+            </div>
+
+            <div class="flex items-center gap-4">
+                <span>ساعات العمل: 24/7</span>
+                <div class="flex gap-2">
+                    <div class="w-6 h-6 flex items-center justify-center">
+                        <i class="ri-facebook-fill text-blue-400"></i>
+                    </div>
+                    <div class="w-6 h-6 flex items-center justify-center">
+                        <i class="ri-twitter-fill text-blue-300"></i>
+                    </div>
+                    <div class="w-6 h-6 flex items-center justify-center">
+                        <i class="ri-instagram-fill text-pink-400"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Header -->
+    <div class="max-w-7xl mx-auto px-4 py-4">
+        <div class="flex items-center justify-between">
+            <!-- Logo -->
+            <div class="flex items-center gap-3">
+                <div class="w-12 h-12 flex items-center justify-center bg-yellow-400 rounded-full">
+                    <img src="logo.png" alt="لوجو صيدلية دكتور محمد عصمت" class="w-full h-full object-cover">
+                </div>
+                <div>
+                    <h1 class="text-2xl font-bold">دكتور محمد عصمت</h1>
+                    <p class="text-sm text-white/80">صيدلية موثوقة</p>
+                </div>
+            </div>
+
+            <!-- Navigation -->
+            <nav class="hidden md:flex items-center gap-8">
+                <a href="#" class="hover:text-yellow-400 transition-colors">الرئيسية</a>
+                <a href="#" class="hover:text-yellow-400 transition-colors">الأدوية</a>
+                <a href="#" class="hover:text-yellow-400 transition-colors">العروض</a>
+                <a href="#" class="hover:text-yellow-400 transition-colors">عنا</a>
+                <a href="#" class="hover:text-yellow-400 transition-colors">اتصل بنا</a>
+            </nav>
+
+            <!-- Actions (تم حذف التكرار، مع الحفاظ على جميع العناصر) -->
+            <div class="flex items-center gap-4">
+                <!-- صندوق البحث -->
+                <div class="relative">
+                    <input
+                        id="searchInput"
+                        type="text"
+                        placeholder="ابحث عن دواء..."
+                        onkeyup="startSearch()"
+                        class="bg-white/20 border border-white/30 rounded-full px-4 py-2 pr-10 text-white placeholder-white/70 focus:outline-none focus:bg-white/30 w-64"
+                    >
+                    <div class="absolute right-3 top-1/2 transform -translate-y-1/2 w-5 h-5 flex items-center justify-center">
+                        <i class="ri-search-line text-white/70"></i>
+                    </div>
+
+                    <!-- صندوق النتائج -->
+                    <div
+                        id="resultsBox"
+                        class="absolute top-full mt-2 w-full bg-white text-black rounded-lg shadow-lg z-50"
+                        style="display:none;"
+                    ></div>
+                </div>
+
+                <!-- أيقونة السلة -->
+                <button class="relative p-2 hover:bg-white/20 rounded-full transition-colors">
+                    <div class="w-6 h-6 flex items-center justify-center">
+                        <i class="ri-shopping-cart-line text-xl"></i>
+                    </div>
+                    <span class="absolute -top-1 -right-1 bg-yellow-400 text-primary text-xs rounded-full w-5 h-5 flex items-center justify-center">
+                        3
                     </span>
-                <button class="md:hidden p-2 hover:bg-white/20 rounded-full transition-colors"><i class="ri-menu-line text-2xl"></i></button><button class="md:hidden p-2 hover:bg-white/20 rounded-full transition-colors"><i class="ri-menu-line text-2xl"></i></button></div>
-                <div class="flex items-center gap-4">
-                    <span>ساعات العمل: 24/7</span>
-                    <div class="flex gap-2">
-                        <div class="w-6 h-6 flex items-center justify-center">
-                            <i class="ri-facebook-fill text-blue-400"></i>
-                        </div>
-                        <div class="w-6 h-6 flex items-center justify-center">
-                            <i class="ri-twitter-fill text-blue-300"></i>
-                        </div>
-                        <div class="w-6 h-6 flex items-center justify-center">
-                            <i class="ri-instagram-fill text-pink-400"></i>
-                        </div>
+                </button>
+
+                <!-- حساب المستخدم -->
+                <button class="p-2 hover:bg-white/20 rounded-full transition-colors">
+                    <div class="w-6 h-6 flex items-center justify-center">
+                        <i class="ri-user-line text-xl"></i>
                     </div>
-                </div>
+                </button>
             </div>
         </div>
-        
-        <!-- Main Header -->
-        <div class="max-w-7xl mx-auto px-4 py-4">
-            <div class="flex items-center justify-between">
-                <!-- Logo -->
-                <div class="flex items-center gap-3">
-                    <div class="w-12 h-12 flex items-center justify-center bg-yellow-400 rounded-full">
-                          <img src="logo.png" alt="لوجو صيدلية دكتور محمد عصمت" class="w-full h-full object-cover">
-                    </div>
-                    <div>
-                        <h1 class="text-2xl font-bold">دكتور محمد عصمت</h1>
-                        <p class="text-sm text-white/80">صيدلية موثوقة</p>
-                    </div>
-                </div>
-                
-                <!-- Navigation -->
-                <nav class="hidden md:flex items-center gap-8">
-                    <a href="#" class="hover:text-yellow-400 transition-colors">الرئيسية</a>
-                    <a href="#" class="hover:text-yellow-400 transition-colors">الأدوية</a>
-                    <a href="#" class="hover:text-yellow-400 transition-colors">العروض</a>
-                    <a href="#" class="hover:text-yellow-400 transition-colors">عنا</a>
-                    <a href="#" class="hover:text-yellow-400 transition-colors">اتصل بنا</a>
-                </nav>
-                
-                <!-- Actions -->
-                <div class="flex items-center gap-4">
-                    <div class="relative">
-                        <input type="text" placeholder="ابحث عن دواء..." class="bg-white/20 border border-white/30 rounded-full px-4 py-2 pr-10 text-white placeholder-white/70 focus:outline-none focus:bg-white/30 w-64">
-                        <div class="absolute right-3 top-1/2 transform -translate-y-1/2 w-5 h-5 flex items-center justify-center">
-                            <i class="ri-search-line text-white/70"></i>
-                        </div>
-                    </div>
-                    <button class="relative p-2 hover:bg-white/20 rounded-full transition-colors">
-                        <div class="w-6 h-6 flex items-center justify-center">
-                            <i class="ri-shopping-cart-line text-xl"></i>
-                        </div>
-                        <span class="absolute -top-1 -right-1 bg-yellow-400 text-primary text-xs rounded-full w-5 h-5 flex items-center justify-center">3</span>
-                    </button>
-                    <button class="p-2 hover:bg-white/20 rounded-full transition-colors">
-                        <div class="w-6 h-6 flex items-center justify-center">
-                            <i class="ri-user-line text-xl"></i>
-                        </div>
-                    </button>
-                </div>
-            </div>
-        </div>
-    </header>
+    </div>
+</header>
+
 
     <!-- Hero Section -->
-    <section class="hero-bg relative overflow-hidden" style="background-image: url('https://readdy.ai/api/search-image?query=Modern%20pharmacy%20interior%20with%20clean%20white%20shelves%20filled%20with%20medicines%2C%20bright%20lighting%2C%20professional%20healthcare%20environment%2C%20teal%20and%20white%20color%20scheme%2C%20spacious%20layout%2C%20contemporary%20design%2C%20medical%20equipment%20visible%2C%20welcoming%20atmosphere%2C%20high-end%20pharmacy%20setting&amp;width=1920&amp;height=800&amp;seq=hero001&amp;orientation=landscape'); background-size: cover; background-position: center;">
-        <div class="absolute inset-0 bg-primary/70"></div>
-        <div class="relative max-w-7xl mx-auto px-4 py-24">
-            <div class="w-full text-center text-white">
-                <h1 class="text-5xl md:text-6xl font-bold mb-6">مرحباً بكم في صيدلية دكتور محمد عصمت</h1>
-                <p class="text-xl md:text-2xl mb-8 text-white/90">خدمات صيدلانية موثوقة لصحتكم وعائلتكم</p>
-                <div class="flex flex-col md:flex-row items-center justify-center gap-6 mb-12">
-                    <button class="bg-yellow-400 text-primary px-8 py-4 rounded-button text-lg font-semibold hover:bg-yellow-300 transition-colors whitespace-nowrap !rounded-button">
-                        تسوق الآن
-                    </button>
-                    <div class="relative">
-                        <input type="text" placeholder="ابحث عن دواء أو منتج..." class="bg-white border-2 border-secondary rounded-full px-6 py-4 pr-12 text-gray-800 placeholder-gray-500 focus:outline-none focus:border-yellow-400 w-80">
-                        <div class="absolute right-4 top-1/2 transform -translate-y-1/2 w-6 h-6 flex items-center justify-center">
-                            <i class="ri-search-line text-secondary text-xl"></i>
-                        </div>
-                    </div>
-                </div>
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-                    <div class="bg-white/20 backdrop-blur-sm rounded-lg p-6">
-                        <div class="text-3xl font-bold text-yellow-400">15+</div>
-                        <div class="text-white/90">سنة خبرة 15 </div>
-                    </div>
-                    <div class="bg-white/20 backdrop-blur-sm rounded-lg p-6">
-                        <div class="text-3xl font-bold text-yellow-400">5000+</div>
-                        <div class="text-white/90">عميل راضي</div>
-                    </div>
-                    <div class="bg-white/20 backdrop-blur-sm rounded-lg p-6">
-                        <div class="text-3xl font-bold text-yellow-400">24/7</div>
-                        <div class="text-white/90">خدمة مستمرة</div>
-                    </div>
-                    <div class="bg-white/20 backdrop-blur-sm rounded-lg p-6">
-                        <div class="text-3xl font-bold text-yellow-400">30 دقيقة</div>
-                        <div class="text-white/90">توصيل سريع</div>
+<section class="hero-bg relative overflow-hidden" style="background-image: url('https://readdy.ai/api/search-image?query=Modern%20pharmacy%20interior%20with%20clean%20white%20shelves%20filled%20with%20medicines%2C%20bright%20lighting%2C%20professional%20healthcare%20environment%2C%20teal%20and%20white%20color%20scheme%2C%20spacious%20layout%2C%20contemporary%20design%2C%20medical%20equipment%20visible%2C%20welcoming%20atmosphere%2C%20high-end%20pharmacy%20setting&amp;width=1920&amp;height=800&amp;seq=hero001&amp;orientation=landscape'); background-size: cover; background-position: center;">
+    <div class="absolute inset-0 bg-primary/70"></div>
+    <div class="relative max-w-7xl mx-auto px-4 py-24">
+        <div class="w-full text-center text-white">
+            <h1 class="text-5xl md:text-6xl font-bold mb-6">مرحباً بكم في صيدلية دكتور محمد عصمت</h1>
+            <p class="text-xl md:text-2xl mb-8 text-white/90">خدمات صيدلانية موثوقة لصحتكم وعائلتكم</p>
+            <div class="flex flex-col md:flex-row items-center justify-center gap-6 mb-12">
+                <button class="bg-yellow-400 text-primary px-8 py-4 rounded-button text-lg font-semibold hover:bg-yellow-300 transition-colors whitespace-nowrap !rounded-button">
+                    تسوق الآن
+                </button>
+                <div class="relative">
+                    <!-- لو حبيت تضيف id فريد: id="heroSearchInput" -->
+                    <input type="text"
+                           placeholder="ابحث عن دواء أو منتج..."
+                           class="bg-white border-2 border-secondary rounded-full px-6 py-4 pr-12 text-gray-800 placeholder-gray-500 focus:outline-none focus:border-yellow-400 w-80">
+                    <div class="absolute right-4 top-1/2 transform -translate-y-1/2 w-6 h-6 flex items-center justify-center">
+                        <i class="ri-search-line text-secondary text-xl"></i>
                     </div>
                 </div>
             </div>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+                <div class="bg-white/20 backdrop-blur-sm rounded-lg p-6">
+                    <div class="text-3xl font-bold text-yellow-400">15+</div>
+                    <div class="text-white/90">سنة خبرة 15 </div>
+                </div>
+                <div class="bg-white/20 backdrop-blur-sm rounded-lg p-6">
+                    <div class="text-3xl font-bold text-yellow-400">5000+</div>
+                    <div class="text-white/90">عميل راضي</div>
+                </div>
+                <div class="bg-white/20 backdrop-blur-sm rounded-lg p-6">
+                    <div class="text-3xl font-bold text-yellow-400">24/7</div>
+                    <div class="text-white/90">خدمة مستمرة</div>
+                </div>
+                <div class="bg-white/20 backdrop-blur-sm rounded-lg p-6">
+                    <div class="text-3xl font-bold text-yellow-400">30 دقيقة</div>
+                    <div class="text-white/90">توصيل سريع</div>
+                </div>
+            </div>
         </div>
-    </section>
+    </div>
+</section>
 
-    <!-- Quick Services -->
-    <section class="py-16 bg-white">
-        <div class="max-w-7xl mx-auto px-4">
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                <div class="service-card bg-white rounded-lg p-6 text-center shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100">
-                    <div class="w-16 h-16 flex items-center justify-center bg-primary/10 rounded-full mx-auto mb-4">
-                        <i class="ri-truck-line text-3xl text-primary"></i>
-                    </div>
-                    <h3 class="text-xl font-semibold text-gray-800 mb-2">توصيل مجاني</h3>
-                    <p class="text-gray-600">توصيل مجاني للطلبات أكثر من 100 ج.م</p>
+<!-- Quick Services -->
+<section class="py-16 bg-white">
+    <div class="max-w-7xl mx-auto px-4">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div class="service-card bg-white rounded-lg p-6 text-center shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100">
+                <div class="w-16 h-16 flex items-center justify-center bg-primary/10 rounded-full mx-auto mb-4">
+                    <i class="ri-truck-line text-3xl text-primary"></i>
                 </div>
-                
-                <div class="service-card bg-white rounded-lg p-6 text-center shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100">
-                    <div class="w-16 h-16 flex items-center justify-center bg-primary/10 rounded-full mx-auto mb-4">
-                        <i class="ri-user-heart-line text-3xl text-primary"></i>
-                    </div>
-                    <h3 class="text-xl font-semibold text-gray-800 mb-2">استشارة دوائية</h3>
-                    <p class="text-gray-600">استشارات مجانية من صيادلة مؤهلين</p>
+                <h3 class="text-xl font-semibold text-gray-800 mb-2">توصيل مجاني</h3>
+                <p class="text-gray-600">توصيل مجاني للطلبات أكثر من 100 ج.م</p>
+            </div>
+
+            <div class="service-card bg-white rounded-lg p-6 text-center shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100">
+                <div class="w-16 h-16 flex items-center justify-center bg-primary/10 rounded-full mx-auto mb-4">
+                    <i class="ri-user-heart-line text-3xl text-primary"></i>
                 </div>
-                
-                <div class="service-card bg-white rounded-lg p-6 text-center shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100">
-                    <div class="w-16 h-16 flex items-center justify-center bg-primary/10 rounded-full mx-auto mb-4">
-                        <i class="ri-file-text-line text-3xl text-primary"></i>
-                    </div>
-                    <h3 class="text-xl font-semibold text-gray-800 mb-2">أدوية بوصفة طبية</h3>
-                    <p class="text-gray-600">صرف الأدوية بوصفات طبية معتمدة</p>
+                <h3 class="text-xl font-semibold text-gray-800 mb-2">استشارة دوائية</h3>
+                <p class="text-gray-600">استشارات مجانية من صيادلة مؤهلين</p>
+            </div>
+
+            <div class="service-card bg-white rounded-lg p-6 text-center shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100">
+                <div class="w-16 h-16 flex items-center justify-center bg-primary/10 rounded-full mx-auto mb-4">
+                    <i class="ri-file-text-line text-3xl text-primary"></i>
                 </div>
-                
-                <div class="service-card bg-white rounded-lg p-6 text-center shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100">
-                    <div class="w-16 h-16 flex items-center justify-center bg-primary/10 rounded-full mx-auto mb-4">
-                        <i class="ri-heart-pulse-line text-3xl text-primary"></i>
-                    </div>
-                    <h3 class="text-xl font-semibold text-gray-800 mb-2">منتجات العناية</h3>
-                    <p class="text-gray-600">منتجات عناية وتجميل أصلية</p>
+                <h3 class="text-xl font-semibold text-gray-800 mb-2">أدوية بوصفة طبية</h3>
+                <p class="text-gray-600">صرف الأدوية بوصفات طبية معتمدة</p>
+            </div>
+
+            <div class="service-card bg-white rounded-lg p-6 text-center shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100">
+                <div class="w-16 h-16 flex items-center justify-center bg-primary/10 rounded-full mx-auto mb-4">
+                    <i class="ri-heart-pulse-line text-3xl text-primary"></i>
                 </div>
+                <h3 class="text-xl font-semibold text-gray-800 mb-2">منتجات العناية</h3>
+                <p class="text-gray-600">منتجات عناية وتجميل أصلية</p>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
     <!-- Featured Products -->
     <section class="py-16 bg-gray-50">
@@ -770,6 +800,7 @@ function startSearch() {
 
 
 </body></html>
+
 
 
 
