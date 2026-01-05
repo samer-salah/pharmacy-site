@@ -769,10 +769,12 @@ function startSearch() {
         return;
     }
 
-    fetch('https://github.com/samer-salah/pharmacy-site/blob/main/medicines.json')
-        .then(res => res.json())
-        .then(data => {
-            const filtered = data.filter(drug =>
+    
+    fetch('./medicines.json')
+  .then(response => response.json())
+  .then(data => console.log(data));
+
+               const filtered = data.filter(drug =>
                 drug.name.toLowerCase().includes(word)
             );
 
@@ -800,6 +802,7 @@ function startSearch() {
 
 
 </body></html>
+
 
 
 
