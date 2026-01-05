@@ -9,6 +9,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
     <link href="https://fonts.googleapis.com/css2?family=Pacifico&amp;display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+
     <script>
         tailwind.config = {
             theme: {
@@ -512,6 +515,10 @@
             </div>
         </div>
     </section>
+        <a href="https://wa.me/201069446443" class="floating-whatsapp">
+        <i class="ri-whatsapp-line text-white text-3xl"></i>
+    </a>
+
 
     <!-- Footer -->
     <footer class="bg-primary text-white py-12">
@@ -617,158 +624,153 @@
             </div>
         </div>
     </footer>
+<script id="search-functionality">
+document.addEventListener('DOMContentLoaded', function () {
+    const searchInputs = document.querySelectorAll('input[type="text"]');
 
-    <script type="text/javascript" crossorigin="anonymous" src="https://us-assets.i.posthog.com/static/surveys.js?v=1.310.1"></script><script type="text/javascript" crossorigin="anonymous" src="https://us-assets.i.posthog.com/static/lazy-recorder.js?v=1.310.1"></script><script type="text/javascript" crossorigin="anonymous" src="https://us-assets.i.posthog.com/array/phc_V7JMHB0fVJGRu8UHyrsj6pSL1BS76P5zD8qCi7lrTTV/config.js"></script><script id="cart-functionality">
-        document.addEventListener('DOMContentLoaded', function() {
-            const cartButtons = document.querySelectorAll('button:contains("أضف للسلة")');
-            const cartIcon = document.querySelector('.ri-shopping-cart-line').parentElement;
-            const cartCount = cartIcon.querySelector('span');
-            
-            let cartItems = 0;
-            
-            cartButtons.forEach(button => {
-                if (button.textContent.includes('أضف للسلة')) {
-                    button.addEventListener('click', function() {
-                        cartItems++;
-                        cartCount.textContent = cartItems;
-                        
-                        button.textContent = 'تمت الإضافة';
-                        button.classList.add('bg-green-600');
-                        button.classList.remove('bg-primary');
-                        
-                        setTimeout(() => {
-                            button.textContent = 'أضف للسلة';
-                            button.classList.remove('bg-green-600');
-                            button.classList.add('bg-primary');
-                        }, 2000);
-                    });
+    searchInputs.forEach(input => {
+        if (input.placeholder.includes('ابحث')) {
+            input.addEventListener('keypress', function (e) {
+                if (e.key === 'Enter') {
+                    const searchTerm = this.value.trim();
+                    if (searchTerm) {
+                        console.log('البحث عن:', searchTerm);
+                    }
                 }
             });
+        }
+    });
+});
+</script>
+<script id="mobile-menu">
+document.addEventListener('DOMContentLoaded', function () {
+    const mobileMenuButton = document.createElement('button');
+    mobileMenuButton.innerHTML = '<i class="ri-menu-line text-2xl"></i>';
+    mobileMenuButton.className = 'md:hidden p-2 hover:bg-white/20 rounded-full transition-colors';
+
+    const nav = document.querySelector('nav');
+    const header = document.querySelector('header .max-w-7xl');
+
+    if (nav && header) {
+        const container = header.querySelector('.flex.items-center.gap-4');
+        if (container) {
+            container.appendChild(mobileMenuButton);
+        }
+
+        mobileMenuButton.addEventListener('click', function () {
+            nav.classList.toggle('hidden');
+            nav.classList.toggle('flex');
+            nav.classList.toggle('flex-col');
+            nav.classList.toggle('absolute');
+            nav.classList.toggle('top-full');
+            nav.classList.toggle('left-0');
+            nav.classList.toggle('right-0');
+            nav.classList.toggle('bg-primary');
+            nav.classList.toggle('p-4');
+            nav.classList.toggle('shadow-lg');
         });
-    </script>
-
-    <script id="search-functionality">
-        document.addEventListener('DOMContentLoaded', function() {
-            const searchInputs = document.querySelectorAll('input[type="text"]');
-            
-            searchInputs.forEach(input => {
-                if (input.placeholder.includes('ابحث')) {
-                    input.addEventListener('keypress', function(e) {
-                        if (e.key === 'Enter') {
-                            const searchTerm = this.value.trim();
-                            if (searchTerm) {
-                                console.log('البحث عن:', searchTerm);
-                            }
-                        }
-                    });
-                }
-            });
-        });
-    </script>
-
-    <script id="mobile-menu">
-        document.addEventListener('DOMContentLoaded', function() {
-            const mobileMenuButton = document.createElement('button');
-            mobileMenuButton.innerHTML = '<i class="ri-menu-line text-2xl"></i>';
-            mobileMenuButton.className = 'md:hidden p-2 hover:bg-white/20 rounded-full transition-colors';
-            
-            const nav = document.querySelector('nav');
-            const header = document.querySelector('header .max-w-7xl');
-            
-            if (nav && header) {
-                header.querySelector('.flex.items-center.gap-4').appendChild(mobileMenuButton);
-                
-                mobileMenuButton.addEventListener('click', function() {
-                    nav.classList.toggle('hidden');
-                    nav.classList.toggle('flex');
-                    nav.classList.toggle('flex-col');
-                    nav.classList.toggle('absolute');
-                    nav.classList.toggle('top-full');
-                    nav.classList.toggle('left-0');
-                    nav.classList.toggle('right-0');
-                    nav.classList.toggle('bg-primary');
-                    nav.classList.toggle('p-4');
-                    nav.classList.toggle('shadow-lg');
-                });
-            }
-        });
-    </script>
-
-<script>
-    !function (t, e) { var o, n, p, r; e.__SV || (window.posthog = e, e._i = [], e.init = function (i, s, a) { function g(t, e) { var o = e.split("."); 2 == o.length && (t = t[o[0]], e = o[1]), t[e] = function () { t.push([e].concat(Array.prototype.slice.call(arguments, 0))) } } (p = t.createElement("script")).type = "text/javascript", p.crossOrigin = "anonymous", p.async = !0, p.src = s.api_host.replace(".i.posthog.com", "-assets.i.posthog.com") + "/static/array.js", (r = t.getElementsByTagName("script")[0]).parentNode.insertBefore(p, r); var u = e; for (void 0 !== a ? u = e[a] = [] : a = "posthog", u.people = u.people || [], u.toString = function (t) { var e = "posthog"; return "posthog" !== a && (e += "." + a), t || (e += " (stub)"), e }, u.people.toString = function () { return u.toString(1) + ".people (stub)" }, o = "init capture register register_once register_for_session unregister unregister_for_session getFeatureFlag getFeatureFlagPayload isFeatureEnabled reloadFeatureFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey getNextSurveyStep identify setPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException loadToolbar get_property getSessionProperty createPersonProfile opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing clear_opt_in_out_capturing debug".split(" "), n = 0; n < o.length; n++)g(u, o[n]); e._i.push([i, s, a]) }, e.__SV = 1) }(document, window.posthog || []);
-    posthog.init('phc_V7JMHB0fVJGRu8UHyrsj6pSL1BS76P5zD8qCi7lrTTV', {
-        api_host: 'https://us.i.posthog.com',
-        autocapture: false,
-        capture_pageview: false,
-        capture_pageleave: false,
-        capture_performance: {
-            web_vitals: false,
-        },
-        rageclick: false,
-    
-<!-- رابط أيقونة Remix Icon -->
-<link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
-
-<!-- الزر العائم -->
-<!-- رابط أيقونة Remix Icon -->
-<link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
-
-
- <a href="https://wa.me/201069446443" class="floating-whatsapp">
-        <i class="ri-whatsapp-line text-white text-3xl"></i>
-    </a>
-
-
-<!-- JS لضمان ظهور الزر دائمًا -->
-<script>
-  const waBtn = document.querySelector('a[href^="https://wa.me"]');
-  if (waBtn) {
-    waBtn.style.display = 'flex';
-    waBtn.style.position = 'fixed';
-    waBtn.style.bottom = '1.5rem'; // يحدد المسافة من أسفل الشاشة
-    waBtn.style.left = '1.5rem';   // يحدد المسافة من الجهة اليسرى
-    waBtn.style.zIndex = '99999';  // رفع قيمة z-index لتأكيد ظهوره فوق كل العناصر
-  }
+    }
+});
 </script>
 <script>
-        function startSearch() {
-            const word = document.getElementById('searchInput').value.toLowerCase();
-            const resultsBox = document.getElementById('resultsBox');
-
-            if (word.length < 2) {
-                resultsBox.style.display = 'none';
-                return;
+!function(t,e){
+    var o,n,p,r;
+    e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){
+        function g(t,e){
+            var o=e.split(".");
+            2==o.length&&(t=t[o[0]],e=o[1]),
+            t[e]=function(){
+                t.push([e].concat(Array.prototype.slice.call(arguments,0)))
             }
-
-            fetch('medicines.json')
-                .then(res => res.json())
-                .then(data => {
-                    const filtered = data.filter(drug => drug.name.toLowerCase().includes(word));
-                    if (filtered.length > 0) {
-                        resultsBox.style.display = 'block';
-                        resultsBox.innerHTML = filtered.map(drug => `
-                            <div class="flex items-center p-3 border-b hover:bg-gray-50 cursor-pointer">
-                                <img src="${drug.image}" class="w-10 h-10 object-contain ml-3">
-                                <div class="flex-grow text-right">
-                                    <b class="text-primary block text-sm">${drug.name}</b>
-                                    <small class="text-gray-500">${drug.category}</small>
-                                </div>
-                                <div class="font-bold text-secondary text-sm">${drug.price} ج.م</div>
-                            </div>
-                        `).join('');
-                    } else {
-                        resultsBox.style.display = 'block';
-                        resultsBox.innerHTML = '<div class="p-4 text-center text-gray-400">غير موجود</div>';
-                    }
-                }).catch(err => console.error("medicines.json"));
         }
-    </script>
+        (p=t.createElement("script")).type="text/javascript",
+        p.crossOrigin="anonymous",
+        p.async=!0,
+        p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",
+        (r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);
+        var u=e;
+        for(
+            void 0!==a?u=e[a]=[]:a="posthog",
+            u.people=u.people||[],
+            u.toString=function(t){
+                var e="posthog";
+                return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e
+            },
+            u.people.toString=function(){
+                return u.toString(1)+".people (stub)"
+            },
+            o="init capture identify reset".split(" "),
+            n=0;n<o.length;n++
+        ) g(u,o[n]);
+        e._i.push([i,s,a])
+    },e.__SV=1)
+}(document,window.posthog||[]);
+
+posthog.init('phc_V7JMHB0fVJGRu8UHyrsj6pSL1BS76P5zD8qCi7lrTTV', {
+    api_host: 'https://us.i.posthog.com',
+    autocapture: false,
+    capture_pageview: false,
+    capture_pageleave: false,
+    capture_performance: { web_vitals: false },
+    rageclick: false
+});
+</script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const waBtn = document.querySelector('a[href^="https://wa.me"]');
+    if (waBtn) {
+        waBtn.style.display = 'flex';
+        waBtn.style.position = 'fixed';
+        waBtn.style.bottom = '1.5rem';
+        waBtn.style.left = '1.5rem';
+        waBtn.style.zIndex = '99999';
+    }
+});
+</script>
+<script>
+function startSearch() {
+    const input = document.getElementById('searchInput');
+    const resultsBox = document.getElementById('resultsBox');
+    if (!input || !resultsBox) return;
+
+    const word = input.value.toLowerCase();
+    if (word.length < 2) {
+        resultsBox.style.display = 'none';
+        return;
+    }
+
+    fetch('medicines.json')
+        .then(res => res.json())
+        .then(data => {
+            const filtered = data.filter(drug =>
+                drug.name.toLowerCase().includes(word)
+            );
+
+            resultsBox.style.display = 'block';
+            resultsBox.innerHTML = filtered.length
+                ? filtered.map(drug => `
+                    <div class="flex items-center p-3 border-b hover:bg-gray-50 cursor-pointer">
+                        <img src="${drug.image}" class="w-10 h-10 object-contain ml-3">
+                        <div class="flex-grow text-right">
+                            <b class="text-primary block text-sm">${drug.name}</b>
+                            <small class="text-gray-500">${drug.category}</small>
+                        </div>
+                        <div class="font-bold text-secondary text-sm">${drug.price} ج.م</div>
+                    </div>
+                `).join('')
+                : '<div class="p-4 text-center text-gray-400">غير موجود</div>';
+        })
+        .catch(() => console.error('medicines.json'));
+}
+</script>
+
 </body>
 
 
 
 
 </body></html>
+
 
 
 
