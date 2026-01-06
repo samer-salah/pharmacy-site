@@ -12,7 +12,25 @@
     <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+<style>
+     /* إجبار السلايدر على أخذ عرض الشاشة بالكامل */
+.slider-container {
+    width: 100vw !important;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw !important;
+    margin-right: -50vw !important;
+    overflow: hidden;
+}
 
+.mySwiper .swiper-slide img {
+    width: 100% !important;
+    height: 450px !important; /* ارتفاع مناسب مثل موقع النهدي */
+    object-fit: cover !important;
+    display: block;
+}
+    </style>
     <script>
         tailwind.config = {
             theme: {
@@ -36,23 +54,7 @@
                 }
             }
         } 
-       /* إجبار السلايدر على أخذ عرض الشاشة بالكامل */
-.slider-container {
-    width: 100vw !important;
-    position: relative;
-    left: 50%;
-    right: 50%;
-    margin-left: -50vw !important;
-    margin-right: -50vw !important;
-    overflow: hidden;
-}
-
-.mySwiper .swiper-slide img {
-    width: 100% !important;
-    height: 450px !important; /* ارتفاع مناسب مثل موقع النهدي */
-    object-fit: cover !important;
-    display: block;
-}
+      
     </script>
        
     <link rel="icon" type="image/png" href="https://cdn-icons-png.flaticon.com/512/822/822143.png">
@@ -828,7 +830,7 @@ function startSearch() {
                     </div>
                 `).join('')
                 : '<div class="p-4 text-center text-gray-400">غير موجود</div>';
-        })
+        }
         .catch(() => console.error('medicines.json'));
 }
 </script>
@@ -859,6 +861,7 @@ function startSearch() {
 
 
 </body></html>
+
 
 
 
