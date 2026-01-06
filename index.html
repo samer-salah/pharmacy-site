@@ -11,6 +11,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 
     <script>
         tailwind.config = {
@@ -43,6 +44,25 @@
     <!-- Header -->
     <header class="bg-primary text-white shadow-lg">
     <!-- Top Bar -->
+        <div class="slider-container">
+        <div class="swiper mySwiper">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                    <img src="https://img.freepik.com/free-vector/flat-horizontal-sale-banner-template-with-photo_23-2149000923.jpg" alt="خصومات الشتاء">
+                </div>
+                <div class="swiper-slide">
+                    <img src="https://img.freepik.com/free-vector/flat-sale-banner-template-with-photo_23-2149026908.jpg" alt="عروض العناية">
+                </div>
+                <div class="swiper-slide">
+                    <img src="https://img.freepik.com/free-vector/flat-design-shopping-center-sales-banner_23-2149332408.jpg" alt="تخفيضات كبرى">
+                </div>
+            </div>
+            
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-pagination"></div>
+        </div>
+    </div>
     <div class="bg-primary/90 py-2">
         <div class="max-w-7xl mx-auto px-4 flex justify-between items-center text-sm">
             <div class="flex items-center gap-4">
@@ -795,13 +815,33 @@ function startSearch() {
         .catch(() => console.error('medicines.json'));
 }
 </script>
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
+    <script>
+        var swiper = new Swiper(".mySwiper", {
+            loop: true, // تكرار لا نهائي
+            centeredSlides: true,
+            autoplay: {
+                delay: 3500, // سرعة التبديل (3.5 ثانية)
+                disableOnInteraction: false,
+            },
+            pagination: {
+                el: ".swiper-pagination",
+                clickable: true,
+            },
+            navigation: {
+                nextEl: ".swiper-button-next",
+                prevEl: ".swiper-button-prev",
+            },
+        });
+    </script>
 
 
 
 
 
 </body></html>
+
 
 
 
