@@ -60,29 +60,89 @@
 }
 
      /* الاسم فوق الصورة */
-    .background-text {
+    .team-container {
+    position: relative;
+    text-align: center;
+    padding: 50px 0;
+    overflow: hidden;
+}
+
+/* النص الخافت في الخلفية */
+.background-name {
     position: absolute;
-    top: 20%;
+    top: 30%;
     left: 50%;
     transform: translate(-50%, -50%);
-    font-size: 8rem; /* حجم كبير جداً */
-    font-weight: bold;
-    color: rgba(0, 0, 0, 0.05); /* شفافية عالية جداً ليكون خفيفاً */
-    z-index: 0; /* ليكون خلف الصور */
+    font-size: 10vw;
+    font-weight: 900;
+    color: rgba(0, 0, 0, 0.03); /* شفافية عالية جداً */
+    z-index: -1;
     text-transform: uppercase;
     white-space: nowrap;
-    pointer-events: none; /* لكي لا يعيق الضغط على الصور */
 }
 
-.info-footer {
-    text-align: center;
-    margin-top: 20px;
+.carousel-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    perspective: 1000px;
+    height: 400px;
 }
 
-.info-footer h3 {
-    color: #2c3e50;
-    border-bottom: 2px solid #3498db; /* الخط الذي تحت الاسم */
+.carousel {
+    position: relative;
+    width: 250px;
+    height: 350px;
+    transform-style: preserve-3d;
+}
+
+.card {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    border-radius: 20px;
+    overflow: hidden;
+    opacity: 0;
+    pointer-events: none;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+}
+
+.card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* يحل مشكلة تشوه الصور */
+}
+
+/* حالة البطاقة النشطة */
+.card.active {
+    opacity: 1;
+    z-index: 10;
+    transform: translateZ(150px);
+    pointer-events: auto;
+}
+
+/* حالة البطاقة التالية (يمين) */
+.card.next {
+    opacity: 0.6;
+    z-index: 5;
+    transform: translateX(160px) scale(0.8) rotateY(-25deg);
+}
+
+/* حالة البطاقة السابقة (يسار) */
+.card.prev {
+    opacity: 0.6;
+    z-index: 5;
+    transform: translateX(-160px) scale(0.8) rotateY(25deg);
+}
+
+/* تجميل النص السفلي */
+.footer-info h3 {
+    margin-top: 30px;
+    color: #3498db;
+    border-bottom: 2px solid #3498db;
     display: inline-block;
+    padding-bottom: 5px;
 }
 
     
@@ -146,22 +206,37 @@ a {
 
             // خاص بالاسماء وتحريكها في البطاقة
 
-        function updateContent() {
-    // جلب البطاقة النشطة حالياً
-    const activeCard = document.querySelector('.card.active');
-    
-    // جلب البيانات من البطاقة
-    const name = activeCard.getAttribute('data-name');
-    const role = activeCard.getAttribute('data-role');
+       let currentIndex = 0;
+const cards = document.querySelectorAll('.card');
+const bgName = document.getElementById('bg-name');
+const footerName = document.getElementById('footer-name');
+const footerRole = document.getElementById('footer-role');
 
-    // تحديث النص في الخلفية وفي الأسفل
-    document.getElementById('bg-name').innerText = name;
-    document.getElementById('footer-name').innerText = name;
-    document.getElementById('footer-role').innerText = role;
+function updateCarousel() {
+    cards.forEach((card, index) => {
+        card.classList.remove('active', 'next', 'prev');
+        
+        if (index === currentIndex) {
+            card.classList.add('active');
+            // تحديث النصوص بناءً على بيانات البطاقة النشطة
+            bgName.innerText = card.dataset.name;
+            footerName.innerText = card.dataset.name;
+            footerRole.innerText = card.dataset.role;
+        } else if (index === (currentIndex + 1) % cards.length) {
+            card.classList.add('next');
+        } else if (index === (currentIndex - 1 + cards.length) % cards.length) {
+            card.classList.add('prev');
+        }
+    });
 }
 
-// استدعِ هذه الدالة في كل مرة تضغط فيها على أزرار (Next/Prev)
-      
+function moveCarousel(direction) {
+    currentIndex = (currentIndex + direction + cards.length) % cards.length;
+    updateCarousel();
+}
+
+// التشغيل المبدئي
+updateCarousel();
     </script>
        
     <link rel="icon" type="image/png" href="https://cdn-icons-png.flaticon.com/512/822/822143.png">
@@ -320,51 +395,43 @@ a {
 </section>
 <h1 id="bg-name" class="background-text">احمد محمد</h1>
 
-<div class="team-section">
-  <h2>OUR TEAM</h2>
-  <div class="carousel-container">
-    <div class="carousel">
-      
-      <div class="card active" data-name="احمد محمد" data-role="مدير المشروع">
-        <img src="new-13.jpg" alt="Member 13">
-      </div>
+<div class="team-container">
+    <h1 id="bg-name" class="background-name">احمد محمد</h1>
+    
+    <div class="carousel-wrapper">
+        <div class="carousel" id="carousel">
+            <div class="card active" data-name="احمد محمد" data-role="مدير المشروع">
+                <img src="new-13.jpg">
+            </div>
+            <div class="card next" data-name="سارة أحمد" data-role="مصممة واجهات">
+                <img src="new-14.jpg">
+            </div>
+            <div class="card" data-name="خالد محمود" data-role="مطور ويب">
+                <img src="new-15.jpg">
+            </div>
+            <div class="card" data-name="ليلى يوسف" data-role="تسويق رقمي">
+                <img src="new-16.jpg">
+            </div>
+            <div class="card" data-name="عمر ياسين" data-role="محلل بيانات">
+                <img src="new-17.jpg">
+            </div>
+            <div class="card" data-name="نور الهدى" data-role="كاتبة محتوى">
+                <img src="new-18.jpg">
+            </div>
+            <div class="card prev" data-name="ياسر علي" data-role="مصور فوتوغرافي">
+                <img src="new-19.jpg">
+            </div>
+        </div>
 
-      <div class="card next" data-name="سارة أحمد" data-role="مصممة واجهات">
-        <img src="new-14.jpg" alt="Member 14">
-      </div>
-
-      <div class="card" data-name="خالد محمود" data-role="مطور ويب">
-        <img src="new-15.jpg" alt="Member 15">
-      </div>
-
-      <div class="card" data-name="ليلى يوسف" data-role="تسويق رقمي">
-        <img src="new-16.jpg" alt="Member 16">
-      </div>
-
-      <div class="card" data-name="عمر ياسين" data-role="محلل بيانات">
-        <img src="new-17.jpg" alt="Member 17">
-      </div>
-
-      <div class="card" data-name="نور الهدى" data-role="كاتبة محتوى">
-        <img src="new-18.jpg" alt="Member 18">
-      </div>
-
-      <div class="card prev" data-name="ياسر علي" data-role="مصور فوتوغرافي">
-        <img src="new-19.jpg" alt="Member 19">
-      </div>
-
+        <button class="nav-btn prev-btn" onclick="moveCarousel(-1)">❮</button>
+        <button class="nav-btn next-btn" onclick="moveCarousel(1)">❯</button>
     </div>
 
-    <button class="nav-btn prev-btn">❮</button>
-    <button class="nav-btn next-btn">❯</button>
-  </div>
+    <div class="footer-info">
+        <h3 id="footer-name">احمد محمد</h3>
+        <p id="footer-role">مدير المشروع</p>
+    </div>
 </div>
-
-<div class="info-footer">
-  <h3 id="footer-name">احمد محمد</h3>
-  <p id="footer-role">مدير المشروع</p>
-</div>
-        
 <!-- Quick Services -->
 <section class="py-16 bg-white">
     <div class="max-w-7xl mx-auto px-4">
@@ -998,6 +1065,7 @@ function startSearch() {
 
 
 </body></html>
+
 
 
 
