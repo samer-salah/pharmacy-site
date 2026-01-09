@@ -191,77 +191,75 @@
     @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
 </style>
     <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        primary: '#0d7377',
-                        secondary: '#14a085'
-                    },
-                    borderRadius: {
-                        'none': '0px',
-                        'sm': '4px',
-                        DEFAULT: '8px',
-                        'md': '12px',
-                        'lg': '16px',
-                        'xl': '20px',
-                        '2xl': '24px',
-                        '3xl': '32px',
-                        'full': '9999px',
-                        'button': '8px'
-                    }
-                }
-            }
+       // 1. تعريف العناصر الأساسية
+const items = document.querySelectorAll('.carousel-item');
+const prevBtn = document.querySelector('.prev-btn');
+const nextBtn = document.querySelector('.next-btn');
+const bgName = document.querySelector('.site-name'); // الاسم الكبير الخافت
+const footerName = document.getElementById('footer-name'); // الاسم بالأسفل
+const footerRole = document.getElementById('footer-role'); // الوظيفة بالأسفل
+
+let currentIndex = 0; // سيبدأ من الصورة الأولى (رقم 13)
+
+function updateCarousel() {
+    const n = items.length;
+
+    // 2. مسح كافة الكلاسات القديمة من جميع العناصر
+    items.forEach((item) => {
+        item.classList.remove('active', 'next-1', 'next-2', 'prev-1', 'prev-2', 'hidden');
+        item.style.pointerEvents = "none"; // تعطيل الضغط على الصور غير النشطة
+    });
+
+    // 3. حساب المؤشرات (Indices) للصور الخمس الظاهرة
+    let next1 = (currentIndex + 1) % n;
+    let next2 = (currentIndex + 2) % n;
+    let prev1 = (currentIndex - 1 + n) % n;
+    let prev2 = (currentIndex - 2 + n) % n;
+
+    // 4. إضافة الكلاسات الجديدة لتفعيل توزيع الـ CSS الخاص بك
+    items[currentIndex].classList.add('active');
+    items[next1].classList.add('next-1');
+    items[next2].classList.add('next-2');
+    items[prev1].classList.add('prev-1');
+    items[prev2].classList.add('prev-2');
+
+    // 5. إخفاء باقي الصور (السادسة والسابعة) لمنع التراكم في الخلفية
+    items.forEach((item, index) => {
+        if (![currentIndex, next1, next2, prev1, prev2].includes(index)) {
+            item.classList.add('hidden');
         }
+    });
 
-            // خاص بالاسماء وتحريكها في البطاقة
+    // 6. تحديث النصوص بناءً على الـ data attributes للبطاقة النشطة
+    const activeItem = items[currentIndex];
+    const name = activeItem.getAttribute('data-name');
+    const role = activeItem.getAttribute('data-role');
 
-       let currentIndex = 0;
-        const items = document.querySelectorAll('.carousel-item');
-        const totalItems = items.length;
+    if (name) {
+        if (bgName) bgName.innerText = name;
+        if (footerName) footerName.innerText = name;
+    }
+    if (role && footerRole) {
+        footerRole.innerText = role;
+    }
 
-        function getItemClass(offset) {
-            if (offset === 0) return 'active';
-            if (offset === 1) return 'next-1';
-            if (offset === -1) return 'prev-1';
-            if (offset === 2) return 'next-2';
-            if (offset === -2) return 'prev-2';
-            return 'hidden';
-        }
+    // تفعيل الضغط على الصورة الوسطى فقط
+    items[currentIndex].style.pointerEvents = "auto";
+}
 
-        function updateCarousel() {
-            items.forEach((item, index) => {
-                item.className = 'carousel-item';
-                const offset = (index - currentIndex + totalItems) % totalItems;
-                const adjustedOffset = offset > totalItems / 2 ? offset - totalItems : offset;
-                item.classList.add(getItemClass(adjustedOffset));
-            });
-        }
+// 7. إعداد مستمعي الأحداث للأزرار (Events)
+nextBtn.addEventListener('click', () => {
+    currentIndex = (currentIndex + 1) % items.length;
+    updateCarousel();
+});
 
-        function moveCarousel(direction) {
-            currentIndex = (currentIndex + direction + totalItems) % totalItems;
-            updateCarousel();
-        }
+prevBtn.addEventListener('click', () => {
+    currentIndex = (currentIndex - 1 + items.length) % items.length;
+    updateCarousel();
+});
 
-        // دعم لوحة المفاتيح
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'ArrowLeft') moveCarousel(1);
-            if (e.key === 'ArrowRight') moveCarousel(-1);
-        });
-
-        // دعم السحب
-        let touchStartX = 0;
-        document.querySelector('.carousel-wrapper').addEventListener('touchstart', (e) => {
-            touchStartX = e.changedTouches[0].screenX;
-        });
-
-        document.querySelector('.carousel-wrapper').addEventListener('touchend', (e) => {
-            const touchEndX = e.changedTouches[0].screenX;
-            if (touchStartX - touchEndX > 50) moveCarousel(1);
-            if (touchEndX - touchStartX > 50) moveCarousel(-1);
-        });
-
-        updateCarousel();
+// 8. تشغيل الكاروسيل لأول مرة عند تحميل الصفحة
+document.addEventListener('DOMContentLoaded', updateCarousel);
     </script>
        
     <link rel="icon" type="image/png" href="https://cdn-icons-png.flaticon.com/512/822/822143.png">
@@ -1134,6 +1132,7 @@ function startSearch() {
 
 
 </body></html>
+
 
 
 
