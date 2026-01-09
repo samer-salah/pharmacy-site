@@ -13,6 +13,30 @@
     <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
 <style>
+    tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#0d7377',
+                        secondary: '#14a085'
+                    },
+                    borderRadius: {
+                        'none': '0px',
+                        'sm': '4px',
+                        DEFAULT: '8px',
+                        'md': '12px',
+                        'lg': '16px',
+                        'xl': '20px',
+                        '2xl': '24px',
+                        '3xl': '32px',
+                        'full': '9999px',
+                        'button': '8px'
+                    }
+                }
+            }
+        } 
+
+    
 .carousel-container {
     perspective: 1000px; /* يعطي عمق للمشهد */
     position: relative;
@@ -1294,6 +1318,7 @@ function startSearch() {
 
 
 </body></html>
+
 
 
 
