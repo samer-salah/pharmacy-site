@@ -217,6 +217,7 @@
                     <!-- لو حبيت تضيف id فريد: id="heroSearchInput" -->
                     <input type="text"
                            placeholder="ابحث عن دواء أو منتج..."
+                           onkeyup="startSearch(this)"
                            class="bg-white border-2 border-secondary rounded-full px-6 py-4 pr-12 text-gray-800 placeholder-gray-500 focus:outline-none focus:border-yellow-400 w-80">
                     <div class="absolute right-4 top-1/2 transform -translate-y-1/2 w-6 h-6 flex items-center justify-center">
                         <i class="ri-search-line text-secondary text-xl"></i>
@@ -721,13 +722,29 @@ document.addEventListener('DOMContentLoaded', function () {
     const searchInputs = document.querySelectorAll('input[type="text"]');
 
     searchInputs.forEach(input => {
-        if (input.placeholder.includes('ابحث')) {
-            input.addEventListener('keypress', function (e) {
-                if (e.key === 'Enter') {
-                    const searchTerm = this.value.trim();
-                    if (searchTerm) {
-                        console.log('البحث عن:', searchTerm);
-                    }
+    // استخدم 'input' بدلاً من 'keypress' ليظهر البحث أثناء الكتابة مثل الحقل العلوي
+    input.addEventListener('input', function (e) {
+        const searchTerm = this.value.trim().toLowerCase();
+        
+        // ابحث عن الحاوية (الـ Div) المخصصة لعرض النتائج أسفل هذا الحقل تحديداً
+        // افترضنا هنا أن النتائج لها class اسمه 'search-results-container'
+        const resultsContainer = this.parentElement.querySelector('.search-results-container');
+
+        if (searchTerm.length > 0) {
+            // هنا نضع المنطق الخاص بجلب البيانات (Fetch) أو تصفية الأدوية
+            console.log('جاري البحث عن:', searchTerm);
+            
+            // تأكد أن حاوية النتائج تظهر (Display Block)
+            if (resultsContainer) {
+                resultsContainer.style.display = 'block';
+                // دالة افتراضية لتحديث محتوى النتائج
+                updateSearchResults(searchTerm, resultsContainer);
+            }
+        } else {
+            if (resultsContainer) resultsContainer.style.display = 'none';
+        }
+    });
+});
                 }
             });
         }
@@ -883,6 +900,7 @@ function startSearch() {
 
 
 </body></html>
+
 
 
 
