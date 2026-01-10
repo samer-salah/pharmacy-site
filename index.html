@@ -302,33 +302,37 @@
 
 
 <body>
-<div class="swiper mySwiper">
-  <div class="swiper-wrapper">
-    
-    <div class="swiper-slide">
-      <div class="slide-image-container">
-        <img src="person1.jpg" alt="Emily Kim">
-      </div>
-      <div class="slide-info">
-        <h3 class="font-bold text-gray-800 text-lg">Emily Kim</h3>
-        <p class="text-blue-500 text-xs font-bold uppercase tracking-tighter">Founder</p>
-      </div>
-    </div>
+<section class="min-h-screen flex flex-col items-center justify-center bg-gray-100">
+  <h2 class="text-4xl font-bold mb-10">OUR TEAM</h2>
 
-    <div class="swiper-slide">
-      <div class="slide-image-container">
-        <img src="person2.jpg" alt="Michael">
+  <div class="relative w-[350px] overflow-hidden">
+    <div id="carousel" class="flex transition-transform duration-500">
+      
+      <!-- Card -->
+      <div class="min-w-full flex flex-col items-center bg-white/70 backdrop-blur-lg rounded-2xl shadow-xl p-6">
+        <img src="https://i.pravatar.cc/200" class="w-32 h-32 rounded-full object-cover mb-4">
+        <h3 class="text-xl font-semibold">Emily Kim</h3>
+        <p class="text-gray-500">UX Designer</p>
       </div>
-      <div class="slide-info">
-        <h3 class="font-bold text-gray-800 text-lg">Michael Steward</h3>
-        <p class="text-blue-500 text-xs font-bold uppercase tracking-tighter">Creative Director</p>
+
+      <div class="min-w-full flex flex-col items-center bg-white/70 backdrop-blur-lg rounded-2xl shadow-xl p-6">
+        <img src="https://i.pravatar.cc/201" class="w-32 h-32 rounded-full object-cover mb-4">
+        <h3 class="text-xl font-semibold">John Doe</h3>
+        <p class="text-gray-500">Frontend Dev</p>
       </div>
-    </div>
 
     </div>
-  
-  <div class="swiper-pagination"></div>
-</div>
+
+    <!-- Controls -->
+    <button onclick="prev()" class="absolute left-2 top-1/2 -translate-y-1/2 bg-white p-2 rounded-full shadow">
+      ◀
+    </button>
+    <button onclick="next()" class="absolute right-2 top-1/2 -translate-y-1/2 bg-white p-2 rounded-full shadow">
+      ▶
+    </button>
+  </div>
+</section>
+
 <!-- Quick Services -->
 <section class="py-16 bg-white">
     <div class="max-w-7xl mx-auto px-4">
@@ -979,32 +983,28 @@ function startSearch(currentInput) {
     }); 
 </script>
 
-   <script>
-  var swiper = new Swiper(".mySwiper", {
-    effect: "coverflow",
-    grabCursor: true,
-    centeredSlides: true,
-    slidesPerView: "auto",
-    loop: true,
-    coverflowEffect: {
-      rotate: 0,        // لا تدوير للكروت
-      stretch: -80,     // هذا الرقم يقرب الكروت خلف بعضها (جرب -100 لو أردت تراكم أكبر)
-      depth: 200,       // يزيد من إحساس البُعد الرأسي
-      modifier: 1,
-      slideShadows: false,
-    },
-    pagination: {
-      el: ".swiper-pagination",
-      clickable: true,
-    },
-  });
+  <script>
+let index = 0;
+const carousel = document.getElementById("carousel");
+
+function next() {
+  index = Math.min(index + 1, carousel.children.length - 1);
+  carousel.style.transform = `translateX(-${index * 100}%)`;
+}
+
+function prev() {
+  index = Math.max(index - 1, 0);
+  carousel.style.transform = `translateX(-${index * 100}%)`;
+}
 </script>
 
 
 
 
 
+
 </body></html>
+
 
 
 
