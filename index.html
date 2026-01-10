@@ -63,6 +63,30 @@
     .status-on { color: green; font-weight: bold; }
     .status-off { color: red; font-weight: bold; }
     .price { color: var(--dark-teal); font-weight: bold; }
+
+    * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+  
+    /* واتساب والأنيميشن */
+    .floating-whatsapp {
+        position: fixed;
+        bottom: 20px;
+        left: 20px;
+        width: 60px;
+        height: 60px;
+        background-color: #25D366;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 1000;
+        animation: bounce 2s infinite;
+    }
+    @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }   
 </style>
        
     <link rel="icon" type="image/png" href="https://cdn-icons-png.flaticon.com/512/822/822143.png">
@@ -859,6 +883,7 @@ function startSearch() {
 
 
 </body></html>
+
 
 
 
