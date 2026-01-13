@@ -18,46 +18,118 @@
         --dark-teal: #004d40; /* اللون الأخضر التركوازي الداكن */
         --light-teal: #82ba41;
     }
+    /* تعريف الخط */
+    @font-face {
+  font-family: 'LAXR';
+  src: url('./fonts/LAXR.woff2') format('woff2');
+  font-display: swap;
+}
 
-    .search-container {
-        position: relative;
-        width: 100%;
-        max-width: 500px;
-        margin: 20px auto;
-    }
+.welcome-style {
+  font-family: 'LAXR', sans-serif;
+  font-size: 1.8rem;
 
-    #drugSearch {
-        width: 100%;
-        padding: 15px;
-        border: 2px solid var(--dark-teal);
-        border-radius: 25px;
-        font-family: 'Cairo', sans-serif;
-        outline: none;
-    }
+  line-height: 1.35;   /* ← دي القيمة الآمنة */
+  padding-top: 0.30em; /* ← يمنع أي قص نهائي */
 
-    .results-dropdown {
-        position: absolute;
-        top: 100%;
-        left: 0;
-        right: 0;
-        background: white;
-        border: 1px solid #ddd;
-        border-radius: 10px;
-        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-        display: none; /* مخفي افتراضياً */
-        z-index: 1000;
-        max-height: 300px;
-        overflow-y: auto;
-    }
+  letter-spacing: 0.3px;
+  color: #e6fbff;
+  text-shadow: 0 2px 4px rgba(19, 224, 255, 0.2);
 
-    .result-item {
-        padding: 12px;
-        border-bottom: 1px solid #eee;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        cursor: pointer;
-    }
+  display: inline-block;
+  margin-bottom: 0.2rem; /* قربناه من اللي تحته */
+}
+
+
+
+
+.pharmacy-style {
+  font-family: 'LAXR', sans-serif;
+  color: #6ee8fb; /* لون مشابه للكود القديم اللي انت حاطه */
+  display: inline-block;
+  margin-bottom: 1rem; /* ← المسافة اللي تفصل صيدلية عن الاسم */
+  line-height: 1.25;
+  text-shadow:
+    0 4px 12px rgba(19, 224, 255, 0.25),
+    0 2px 6px rgb(14, 239, 247);
+}
+
+.doctor-name-style {
+  font-family: 'LAXR', sans-serif;
+  display: inline-block;
+  direction: rtl;
+  line-height: 1.25;
+  letter-spacing: 0.3px;
+  color: #fdfdfd;
+  text-shadow:
+    0 4px 12px rgba(5, 76, 87, 0.25),
+    0 2px 6px rgb(14, 239, 247);
+}
+
+
+
+
+    
+/* تأثير التوهج لخلية البحث */
+.custom-glow-search {
+    transition: all 0.3s ease-in-out;
+    position: relative;
+    z-index: 2;
+}
+
+.custom-glow-search:focus {
+    border-color: #facc15 !important; /* لون أصفر Tailwind */
+    box-shadow: 0 0 20px rgba(250, 204, 21, 0.4);
+    transform: translateY(-2px);
+    width: 22rem; /* تمدد بسيط عند البحث */
+}
+
+/* حاوية الفقاقيع الخاصة بالبحث */
+.search-points-wrapper {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.s-point {
+    position: absolute;
+    bottom: 0;
+    width: 4px;        /* حجم أكبر للفقاقيع */
+    height: 4px;
+    background: #facc15;
+    border-radius: 50%;
+    opacity: 0;
+    filter: blur(1px);
+    box-shadow: 0 0 8px #facc15;
+}
+
+/* تشغيل الأنميشن عند الوقوف أو الضغط على البحث */
+.search-wrapper:hover .s-point,
+.custom-glow-search:focus ~ .search-points-wrapper .s-point {
+    animation: search-particles 2s infinite ease-in-out;
+}
+
+@keyframes search-particles {
+    0% { transform: translateY(0); opacity: 0; }
+    50% { opacity: 1; }
+    100% { transform: translateY(-60px); opacity: 0; }
+}
+
+/* توزيع الفقاقيع عشوائياً */
+.s-point:nth-child(1) { left: 20%; animation-delay: 0.2s; }
+.s-point:nth-child(2) { left: 40%; animation-delay: 0.5s; }
+.s-point:nth-child(3) { left: 60%; animation-delay: 0.1s; }
+.s-point:nth-child(4) { left: 80%; animation-delay: 0.7s; }
+.s-point:nth-child(5) { left: 10%; animation-delay: 0.4s; }
+
+/* حركة لأيقونة البحث */
+.custom-glow-search:focus + div .search-icon-anim {
+    color: #eab308;
+    transform: scale(1.2) rotate(10deg);
+    transition: 0.3s;
+}
 
     .result-item:hover { background-color: #f9f9f9; }
 
@@ -88,6 +160,142 @@
         animation: bounce 2s infinite;
     }
     @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+
+   
+.btn-glow {
+  --round: 0.75rem;
+  cursor: pointer;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  transition: all 0.25s ease;
+  /* اللون الأصفر الذهبي المتوهج */
+  background: radial-gradient(
+      65.28% 65.28% at 50% 100%,
+      rgba(0, 217, 255, 0.8) 0%, 
+      rgba(255, 223, 0, 0) 100%
+    ),
+    linear-gradient(0deg, #00b7cf, #08eadf); /* درجات الأصفر Tailwind */
+  border-radius: var(--round);
+  border: none;
+  outline: none;
+  padding: 16px 32px; /* نفس مساحة الـ px-8 py-4 */
+  text-decoration: none;
+}
+
+.btn-glow::before,
+.btn-glow::after {
+  content: "";
+  position: absolute;
+  inset: var(--space);
+  transition: all 0.5s ease-in-out;
+  border-radius: calc(var(--round) - var(--space));
+  z-index: 0;
+}
+
+.btn-glow::before {
+  --space: 1px;
+  background: linear-gradient(
+    177.95deg,
+    rgba(255, 255, 255, 0.4) 0%,
+    rgba(255, 255, 255, 0) 100%
+  );
+}
+
+.btn-glow::after {
+  --space: 2px;
+  background: radial-gradient(
+      65.28% 65.28% at 50% 100%,
+      rgba(0, 229, 255, 0.8) 0%,
+      rgba(255, 223, 0, 0) 100%
+    ),
+    linear-gradient(0deg, #15c8fa, #15fafa);
+}
+
+.btn-glow:active {
+  transform: scale(0.95);
+}
+
+.fold {
+  z-index: 1;
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 1rem;
+  width: 1rem;
+  display: inline-block;
+  transition: all 0.5s ease-in-out;
+  background: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 0 3px rgba(0,0,0,0.1);
+  border-bottom-left-radius: 0.5rem;
+  border-top-right-radius: var(--round);
+}
+
+.fold::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 150%;
+  height: 150%;
+  transform: rotate(45deg) translateX(0%) translateY(-18px);
+  background-color: #ffffff;
+  pointer-events: none;
+}
+
+.btn-glow:hover .fold {
+  margin-top: -1rem;
+  margin-right: -1rem;
+}
+
+.points_wrapper {
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  position: absolute;
+  z-index: 1;
+}
+
+.points_wrapper .point {
+  bottom: -10px;
+  position: absolute;
+  animation: floating-points infinite ease-in-out;
+  pointer-events: none;
+  width: 4px;
+  height: 4px;
+  background-color: #fff;
+  border-radius: 10px;
+}
+
+@keyframes floating-points {
+  0% { transform: translateY(0); }
+  85% { opacity: 0; }
+  100% { transform: translateY(-55px); opacity: 0; }
+}
+
+/* توزيع النقاط العشوائي */
+.points_wrapper .point:nth-child(1) { left: 10%; animation-duration: 2.3s; animation-delay: 0.2s; }
+.points_wrapper .point:nth-child(2) { left: 30%; animation-duration: 2.5s; animation-delay: 0.5s; }
+.points_wrapper .point:nth-child(3) { left: 50%; animation-duration: 2.2s; animation-delay: 0.1s; }
+.points_wrapper .point:nth-child(4) { left: 70%; animation-duration: 2.0s; }
+.points_wrapper .point:nth-child(5) { left: 90%; animation-duration: 1.9s; }
+
+.inner {
+  z-index: 2;
+  gap: 6px;
+  position: relative;
+  width: 100%;
+  color: #1e3a8a; /* لون نص كحلي ليظهر بوضوح على الأصفر */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.125rem; /* نفس حجم text-lg */
+  font-weight: 700;
+}
+
 
 </style>
        
@@ -205,31 +413,62 @@
 
 
     <!-- Hero Section -->
-<section class="hero-bg relative overflow-hidden" style="background-image: url('https://readdy.ai/api/search-image?query=Modern%20pharmacy%20interior%20with%20clean%20white%20shelves%20filled%20with%20medicines%2C%20bright%20lighting%2C%20professional%20healthcare%20environment%2C%20teal%20and%20white%20color%20scheme%2C%20spacious%20layout%2C%20contemporary%20design%2C%20medical%20equipment%20visible%2C%20welcoming%20atmosphere%2C%20high-end%20pharmacy%20setting&amp;width=1920&amp;height=800&amp;seq=hero001&amp;orientation=landscape'); background-size: cover; background-position: center;">
-    <div class="absolute inset-0 bg-primary/70"></div>
+    <section class="hero-bg relative overflow-hidden" 
+    style="background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), 
+    url('https://readdy.ai/api/search-image?query=Modern%20pharmacy%20interior%20with%20clean%20white%20shelves%20filled%20with%20medicines%2C%20bright%20lighting%2C%20professional%20healthcare%20environment%2C%20teal%20and%20white%20color%20scheme%2C%20spacious%20layout%2C%20contemporary%20design%2C%20medical%20equipment%20visible%2C%20welcoming%20atmosphere%2C%20high-end%20pharmacy%20setting&amp;width=1920&amp;height=800&amp;seq=hero001&amp;orientation=landscape'); 
+    background-size: cover; 
+    background-position: center;">
+        <div class="absolute inset-0 bg-primary/70"></div>
     <div class="relative max-w-7xl mx-auto px-4 py-24">
         <div class="w-full text-center text-white">
-            <h1 class="text-5xl md:text-6xl font-bold mb-6">مرحباً بكم في صيدلية دكتور محمد عصمت</h1>
+            <section class="hero-bg relative overflow-hidden" 
+         style="background-image: url('.pharmacy-2.jpg'); 
+                background-size: cover; 
+                background-position: center;">
+  <h1 class="text-5xl md:text-6xl font-bold mb-6 text-center">
+    <span class="welcome-style text-2xl md:text-3xl">مرحبًا بكم في</span>
+    <br><br>
+    <span class="pharmacy-style">صيـدليـة</span>
+    <br>
+    <span class="doctor-name-style">دكتـور  -  محمــد عصمــت</span>
+  </h1>
+</section>
+
+              
             <p class="text-xl md:text-2xl mb-8 text-white/90">خدمات صيدلانية موثوقة لصحتكم وعائلتكم</p>
             <div class="flex flex-col md:flex-row items-center justify-center gap-6 mb-12">
-                <button class="bg-yellow-400 text-primary px-8 py-4 rounded-button text-lg font-semibold hover:bg-yellow-300 transition-colors whitespace-nowrap !rounded-button">
-                    تسوق الآن
-                </button>
+               <button class="btn-glow">
+  <span class="fold"></span>
+  <div class="points_wrapper">
+    <i class="point"></i><i class="point"></i><i class="point"></i><i class="point"></i><i class="point"></i>
+    <i class="point"></i><i class="point"></i><i class="point"></i><i class="point"></i><i class="point"></i>
+  </div>
+  <span class="inner">
+    تسوق الآن
+  </span>
+</button>
+
+
 
                 
 
-                <div class="relative">
-                    <!-- لو حبيت تضيف id فريد: id="heroSearchInput" -->
-                    <input 
-                           id="searchInput"
-                           type="text"
-                           placeholder="ابحث عن دواء أو منتج..."
-                           onkeyup="startSearch(this)"
-                           class="bg-white border-2 border-secondary rounded-full px-6 py-4 pr-12 text-gray-800 placeholder-gray-500 focus:outline-none focus:border-yellow-400 w-80">
-                    <div class="absolute right-4 top-1/2 transform -translate-y-1/2 w-6 h-6 flex items-center justify-center">
-                        <i class="ri-search-line text-secondary text-xl"></i>
-                    </div>
-                </div>
+<div class="relative search-wrapper">
+    <div class="search-points-wrapper">
+        <i class="s-point"></i><i class="s-point"></i><i class="s-point"></i>
+        <i class="s-point"></i><i class="s-point"></i>
+    </div>
+
+    <input 
+        id="searchInput"
+        type="text"
+        placeholder="ابحث عن دواء أو منتج..."
+        onkeyup="startSearch(this)"
+        class="custom-glow-search bg-white border-2 border-secondary rounded-full px-6 py-4 pr-12 text-gray-800 placeholder-gray-500 focus:outline-none w-80 shadow-lg">
+    
+    <div class="absolute right-4 top-1/2 transform -translate-y-1/2 w-6 h-6 flex items-center justify-center pointer-events-none">
+        <i class="ri-search-line text-secondary text-xl search-icon-anim"></i>
+    </div>
+</div>
             </div>
             <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
                 <div class="bg-white/20 backdrop-blur-sm rounded-lg p-6">
