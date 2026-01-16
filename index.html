@@ -27,13 +27,15 @@
     /* تعريف الخط */
     @font-face {
   font-family: 'LAXR';
-  src: url('./LAXR.woff2') format('woff2');
-  font-display: swap;
+    src: url('LAXR.woff2') format('woff2'); /* تأكد أن المسار صحيح */
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
 }
 
 .welcome-style {
-  font-family: 'LAXR', sans-serif;
-  font-size: clamp(1.2rem, 5vw, 1.8rem);
+ font-family: 'LAXR', sans-serif !important;
+    font-size: clamp(1.2rem, 5vw, 1.8rem);
 
   line-height: 1;   /* ← دي القيمة الآمنة */
   padding-top: 0.30em; /* ← يمنع أي قص نهائي */
@@ -61,7 +63,7 @@
 }
 
 .doctor-name-style {
-  font-family: 'LAXR', sans-serif;
+  font-family: 'LAXR', sans-serif !important;
   display: inline-block;
   direction: rtl;
   line-height: 1.25;
@@ -495,10 +497,12 @@ a:active {
         <div class="w-full text-center text-white">
             
             <h1 class="text-4xl md:text-6xl font-bold mb-2 text-center leading-tight">
-                <span class="welcome-style text-xl md:text-2xl block mb-1">مرحبًا بكم في</span>
-                <span class="pharmacy-style">صيـدليـة</span>
-                <span class="doctor-name-style block md:inline">دكتـور - محمــد عصمــت</span>
-            </h1>
+    <span class="welcome-style text-xl md:text-2xl block mb-1">مرحبًا بكم في</span>
+    
+    <span class="pharmacy-style block md:inline">صيـدليـة</span>
+    
+    <span class="doctor-name-style block md:inline text-yellow-400">دكتـور - محمــد عصمــت</span>
+</h1>
 
             <p class="text-lg md:text-2xl mb-6 text-white/90">خدمات صيدلانية موثوقة لصحتكم وعائلتكم</p>
             
@@ -1151,3 +1155,4 @@ function prev() {
 <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.js"></script>
 
 </body></html>
+
